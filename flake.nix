@@ -78,20 +78,9 @@
           };
         };
 
-        # from https://github.com/numtide/flake-utils/issues/4
-        filtered = filterAttrs
-          (_: v:
-            (v.meta ? platforms)
-            && (elem system v.meta.platforms)
-            && (
-              (all (dev: dev.meta ? platforms) v.buildInputs)
-              && (all (dev: elem system dev.meta.platforms) v.buildInputs)
-            ))
-          packages_prime;
-
       in
       {
-        packages = filtered;
+        packages = flake-utils.lib.filterPackages system packages_prime;
       }
     );
 

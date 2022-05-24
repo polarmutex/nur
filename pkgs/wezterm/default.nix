@@ -10,6 +10,7 @@
 , libxcb
 , libxkbcommon
 , naersk-lib
+, ncurses
 , openssl
 , perl
 , pkg-config
@@ -24,17 +25,23 @@
 , xcbutilwm
 , zlib
 , stdenv
+  #, Cocoa
+  #, CoreGraphics
+  #, Foundation
+  #, libiconv
 }:
 
 let
   runtimeDeps = [
     dbus
-    egl-wayland
-    fontconfig
     freetype
+    fontconfig
+    zlib
+  ] ++ lib.optionals stdenv.isLinux [
+    egl-wayland
+    libglvnd
     libGL
     libGLU
-    libglvnd
     libX11
     libxcb
     libxkbcommon
@@ -44,8 +51,13 @@ let
     xcbutilimage
     xcbutilkeysyms
     xcbutilwm
-    zlib
+  ] ++ lib.optionals stdenv.isDarwin [
+    #Cocoa
+    #CoreGraphics
+    #Foundation
+    #libiconv
   ];
+
 in
 naersk-lib.buildPackage {
   pname = "wezterm-git";
@@ -56,8 +68,8 @@ naersk-lib.buildPackage {
   nativeBuildInputs = [
     pkg-config
     python3
-    perl
-  ];
+    ncurses
+  ] ++ lib.optional stdenv.isDarwin perl;
 
   buildInputs = runtimeDeps;
 
