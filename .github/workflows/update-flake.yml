@@ -3,7 +3,7 @@ name: Update Flake
 on:
   schedule:
     # every day at 8am UTC
-    - cron: "0 1 * * *"
+    - cron: "0 5 * * *"
   workflow_dispatch:
 
 jobs:
