@@ -31,6 +31,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -49,6 +64,27 @@
         "type": "github"
       }
     },
+    "neovim": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "dir": "contrib",
+        "lastModified": 1653353703,
+        "narHash": "sha256-/ImT0pIKRklmXyB67e3cJxPTJbcGkkkLYGhyeAzHIVE=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "5eaf9ef8110aa2e05042385d56916a804bb61a05",
+        "type": "github"
+      },
+      "original": {
+        "dir": "contrib",
+        "owner": "neovim",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "narHash": "sha256-kfRusllRumpt33J1hPV+CeCCylCXEU7e0gn2/cIM7cY=",
@@ -61,6 +97,22 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1646254136,
+        "narHash": "sha256-8nQx02tTzgYO21BP/dy5BCRopE8OwE8Drsw98j+Qoaw=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "3e072546ea98db00c2364b81491b893673267827",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1624561540,
         "narHash": "sha256-izJ2PYZMGMsSkg+e7c9A1x3t/yOLT+qzUM6WQsc2tqo=",
@@ -81,7 +133,8 @@
         "awesome-git-src": "awesome-git-src",
         "flake-utils": "flake-utils",
         "naersk": "naersk",
-        "nixpkgs": "nixpkgs_2",
+        "neovim": "neovim",
+        "nixpkgs": "nixpkgs_3",
         "wezterm-git-src": "wezterm-git-src"
       }
     },

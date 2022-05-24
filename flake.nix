@@ -6,7 +6,14 @@
     flake-utils.url = "github:numtide/flake-utils";
     naersk.url = "github:nix-community/naersk";
 
-    awesome-git-src = { url = "github:awesomeWM/awesome"; flake = false; };
+    awesome-git-src = {
+      url = "github:awesomeWM/awesome";
+      flake = false;
+    };
+
+    neovim = {
+      url = "github:neovim/neovim?dir=contrib&tag=master";
+    };
 
     wezterm-git-src = {
       type = "git";
@@ -21,8 +28,9 @@
     {
       overlay = final: prev: {
         inherit (self.packages.${final.system})
-          wezterm-git
-          awesome-git;
+          awesome-git
+          neovim-git
+          wezterm-git;
       };
     }
     // flake-utils.lib.eachDefaultSystem (system:
@@ -31,6 +39,9 @@
           inherit system;
           allowBroken = true;
           allowUnfree = true;
+          overlays = [
+            inputs.neovim.overlay
+          ];
         };
 
         naersk = inputs.naersk.lib."${system}";
@@ -49,6 +60,8 @@
           })).override {
             gtk3Support = true;
           };
+
+          neovim-git = pkgs.neovim;
 
           wezterm-git = pkgs.callPackage ./pkgs/wezterm {
             version = "master";
