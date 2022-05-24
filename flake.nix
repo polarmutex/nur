@@ -72,7 +72,7 @@
           neovim-git = pkgs.neovim;
 
           wezterm-git = pkgs.callPackage ./pkgs/wezterm {
-            version = "master";
+            version = "nightly";
             naersk-lib = naersk;
             src = inputs.wezterm-git-src;
           };
