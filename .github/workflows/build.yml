@@ -25,4 +25,4 @@ jobs:
           name: polarmutex
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       # Packages that compile like snails
-      - run: nix build -L .#awesome-git .#neovim-git .#wezterm-git
+      - run: nix build -L .#awesome-git  .#beancount-language-server-git .#neovim-git .#wezterm-git

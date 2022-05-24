@@ -11,6 +11,10 @@
       flake = false;
     };
 
+    beancount-langserver = {
+      url = "github:polarmutex/beancount-language-server";
+    };
+
     neovim = {
       url = "github:neovim/neovim?dir=contrib&tag=master";
     };
@@ -60,6 +64,8 @@
           })).override {
             gtk3Support = true;
           };
+
+          beancount-langserver-git = inputs.beancount-langserver.packages."${system}".beancount-language-server-git;
 
           neovim-git = pkgs.neovim;
 
