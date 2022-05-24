@@ -65,7 +65,7 @@
             gtk3Support = true;
           };
 
-          beancount-langserver-git = inputs.beancount-langserver.packages."${system}".beancount-language-server-git;
+          beancount-language-server-git = inputs.beancount-langserver.packages."${system}".beancount-language-server-git;
 
           neovim-git = pkgs.neovim;
 
