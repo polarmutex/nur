@@ -16,15 +16,11 @@ jobs:
           install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.9.0pre20220428_660835d/install
           extra_nix_config: |
             experimental-features = nix-command flakes
-      - run: nix flake update --recreate-lock-file
+      - run: nix flake update
       - uses: cachix/cachix-action@v10
         with:
           name: polarmutex
-          #signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-          # Only needed for private caches
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-          # - run: nix build
-      # - run: nix-shell --run "echo OK"
       #- name: Create Pull Request
       #  uses: peter-evans/create-pull-request@v3
       #  with:
