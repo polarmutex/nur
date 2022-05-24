@@ -39,6 +39,12 @@
     }
     // flake-utils.lib.eachDefaultSystem (system:
       let
+        inherit (builtins) elem;
+        inherit (nixpkgs) lib;
+        inherit (lib) all filterAttrs;
+
+        naersk = inputs.naersk.lib."${system}";
+
         pkgs = import nixpkgs {
           inherit system;
           allowBroken = true;
@@ -48,11 +54,7 @@
           ];
         };
 
-        naersk = inputs.naersk.lib."${system}";
-
-      in
-      {
-        packages = rec {
+        packages_prime = rec {
           awesome-git = (pkgs.awesome.overrideAttrs (old: rec {
             version = "master";
             src = inputs.awesome-git-src;
@@ -75,6 +77,21 @@
             src = inputs.wezterm-git-src;
           };
         };
+
+        # from https://github.com/numtide/flake-utils/issues/4
+        filtered = filterAttrs
+          (_: v:
+            (v.meta ? platforms)
+            && (elem system v.meta.platforms)
+            && (
+              (all (dev: dev.meta ? platforms) v.buildInputs)
+              && (all (dev: elem system dev.meta.platforms) v.buildInputs)
+            ))
+          packages_prime;
+
+      in
+      {
+        packages = filtered;
       }
     );
 
