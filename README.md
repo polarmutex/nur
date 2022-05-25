@@ -10,7 +10,9 @@
 
 ### awesome-git
 
-### beancount-language-server-git
+### [beancount-language-server-git](https://github.com/polarmutex/beancount-language-server)
+
+### [bling](https://blingcorp.github.io/bling/#/README)
 
 ### neovim-git
 

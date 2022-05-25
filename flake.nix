@@ -10,6 +10,8 @@
       url = "github:awesomeWM/awesome";
       flake = false;
     };
+    bling-git = { url = "github:BlingCorp/bling"; flake = false; };
+    rubato-git = { url = "github:andOrlando/rubato"; flake = false; };
 
     beancount-langserver = {
       url = "github:polarmutex/beancount-language-server";
@@ -30,7 +32,7 @@
 
   outputs = inputs@{ self, flake-utils, nixpkgs, ... }:
     {
-      overlay = final: prev: {
+      overlays.default = final: prev: {
         inherit (self.packages.${final.system})
           awesome-git
           neovim-git
@@ -66,8 +68,17 @@
           })).override {
             gtk3Support = true;
           };
+          bling-git = pkgs.callPackage ./pkgs/bling {
+            src = inputs.bling-git;
+            inherit (pkgs.lua53Packages) lua toLuaModule;
+          };
+          rubato-git = pkgs.callPackage ./pkgs/rubato {
+            src = inputs.rubato-git;
+            inherit (pkgs.lua53Packages) lua toLuaModule;
+          };
 
           beancount-language-server-git = inputs.beancount-langserver.packages."${system}".beancount-language-server-git;
+
 
           neovim-git = pkgs.neovim;
 
