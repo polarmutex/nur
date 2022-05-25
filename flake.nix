@@ -35,6 +35,11 @@
       overlays.default = final: prev: {
         inherit (self.packages.${final.system})
           awesome-git
+          bling-git
+          rubato-git
+
+          beancount-language-server-git
+
           neovim-git
           wezterm-git;
       };
