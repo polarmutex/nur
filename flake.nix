@@ -10,6 +10,10 @@
       url = "github:awesomeWM/awesome";
       flake = false;
     };
+    awesome-battery-widget-git = {
+      url = "github:Aire-One/awesome-battery_widget";
+      flake = false;
+    };
     bling-git = { url = "github:BlingCorp/bling"; flake = false; };
     rubato-git = { url = "github:andOrlando/rubato"; flake = false; };
 
@@ -35,6 +39,7 @@
       overlays.default = final: prev: {
         inherit (self.packages.${final.system})
           awesome-git
+          awesome-battery-widget-git
           bling-git
           rubato-git
 
@@ -72,6 +77,10 @@
             + old.GI_TYPELIB_PATH;
           })).override {
             gtk3Support = true;
+          };
+          awesome-battery-widget-git = pkgs.callPackage ./pkgs/awesome-battery-widget {
+            src = inputs.awesome-battery-widget-git;
+            inherit (pkgs.lua53Packages) lua toLuaModule;
           };
           bling-git = pkgs.callPackage ./pkgs/bling {
             src = inputs.bling-git;

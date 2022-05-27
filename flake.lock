@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "awesome-battery-widget-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1629647896,
+        "narHash": "sha256-ELNWKnwHDOxgC30xP3gTT1pYLZgGvGd9eVJKd5Ok98A=",
+        "owner": "Aire-One",
+        "repo": "awesome-battery_widget",
+        "rev": "48b83f444d175496104f3b9ff36f1dff0473e01e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Aire-One",
+        "repo": "awesome-battery_widget",
+        "type": "github"
+      }
+    },
     "awesome-git-src": {
       "flake": false,
       "locked": {
@@ -224,6 +240,7 @@
     },
     "root": {
       "inputs": {
+        "awesome-battery-widget-git": "awesome-battery-widget-git",
         "awesome-git-src": "awesome-git-src",
         "beancount-langserver": "beancount-langserver",
         "bling-git": "bling-git",
