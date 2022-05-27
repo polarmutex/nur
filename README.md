@@ -10,9 +10,13 @@
 
 ### awesome-git
 
-### [beancount-language-server-git](https://github.com/polarmutex/beancount-language-server)
+### [awesome-battery_widget](https://github.com/Aire-One/awesome-battery_widget)
 
 ### [bling](https://blingcorp.github.io/bling/#/README)
+
+### rubato
+
+### [beancount-language-server-git](https://github.com/polarmutex/beancount-language-server)
 
 ### neovim-git
 

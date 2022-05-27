@@ -15,7 +15,7 @@ toLuaModule (stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/lib/lua/${lua.luaversion}/
-    cp -r . $out/lib/lua/${lua.luaversion}/bling/
+    cp -r . $out/lib/lua/${lua.luaversion}/awesome-battery-widget/
     printf "package.path = '$out/lib/lua/${lua.luaversion}/?/init.lua;' ..  package.path\nreturn require((...) .. '.init')\n" > $out/lib/lua/${lua.luaversion}/awesome-battery-widget.lua
   '';
 
