@@ -80,15 +80,15 @@
           };
           awesome-battery-widget-git = pkgs.callPackage ./pkgs/awesome-battery-widget {
             src = inputs.awesome-battery-widget-git;
-            inherit (pkgs.lua53Packages) lua toLuaModule;
+            inherit (pkgs.lua52Packages) lua toLuaModule;
           };
           bling-git = pkgs.callPackage ./pkgs/bling {
             src = inputs.bling-git;
-            inherit (pkgs.lua53Packages) lua toLuaModule;
+            inherit (pkgs.lua52Packages) lua toLuaModule;
           };
           rubato-git = pkgs.callPackage ./pkgs/rubato {
             src = inputs.rubato-git;
-            inherit (pkgs.lua53Packages) lua toLuaModule;
+            inherit (pkgs.lua52Packages) lua toLuaModule;
           };
 
           beancount-language-server-git = inputs.beancount-langserver.packages."${system}".beancount-language-server-git;
