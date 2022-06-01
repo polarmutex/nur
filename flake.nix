@@ -70,6 +70,7 @@
           awesome-git = (pkgs.awesome.overrideAttrs (old: rec {
             version = "master";
             src = inputs.awesome-git-src;
+            patches = [ ];
 
             GI_TYPELIB_PATH = "${pkgs.playerctl}/lib/girepository-1.0:"
             + "${pkgs.upower}/lib/girepository-1.0:"
