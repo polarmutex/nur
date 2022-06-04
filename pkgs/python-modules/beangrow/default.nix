@@ -2,7 +2,6 @@
 , buildPythonPackage
 , fetchFromGitHub
 , pytestCheckHook
-, typing-extensions
 , src
 , beancount
 , matplotlib
@@ -15,7 +14,12 @@ buildPythonPackage rec {
   version = "master";
   format = "pyproject";
 
-  inherit src;
+  src = fetchFromGitHub {
+    owner = "polarmutex";
+    repo = pname;
+    rev = "master";
+    sha256 = "sha256-rqLeiguJRES/uJZu0kzDagEdHPcMGQS2Neci32EpBVI=";
+  };
 
   propagatedBuildInputs = [
     beancount

@@ -4,11 +4,13 @@ with final;
 
 let
   callPackage = pkgs.newScope final;
-  #pythonOverrides = import ./development/python-modules final;
   naersk = inputs.naersk.lib."${system}";
+  pythonOverrides = import ./python-modules final;
 in
 {
   inherit callPackage;
+
+  python3Packages = recurseIntoAttrs (pythonOverrides (pkgs.python3Packages // python3Packages) pkgs.python3Packages);
 
   awesome-git = (pkgs.awesome.overrideAttrs (old: rec {
     version = "master";

@@ -60,7 +60,7 @@
 
         in
         rec {
-          checks = packages;
+          #checks = packages;
           packages = flake-utils.lib.filterPackages system (flake-utils.lib.flattenTree nurPkgs);
         }
       ) // rec {
