@@ -39,89 +39,32 @@
   };
 
   outputs = inputs@{ self, flake-utils, nixpkgs, ... }:
-    {
-      overlays.default = final: prev: {
-        inherit (self.packages.${final.system})
-          awesome-git
-          awesome-battery-widget-git
-          bling-git
-          rubato-git
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let
 
-          beancount-language-server-git
+          naersk = inputs.naersk.lib."${system}";
 
-          neovim-git
-          wezterm-git
-
-          beangrow;
-      };
-    }
-    // flake-utils.lib.eachDefaultSystem (system:
-      let
-        inherit (builtins) elem;
-        inherit (nixpkgs) lib;
-        inherit (lib) all filterAttrs;
-
-        naersk = inputs.naersk.lib."${system}";
-
-        pkgs = import nixpkgs {
-          inherit system;
-          allowBroken = true;
-          allowUnfree = true;
-          overlays = [
-            inputs.neovim.overlay
-          ];
-        };
-
-        packages_prime = rec {
-          awesome-git = (pkgs.awesome.overrideAttrs (old: rec {
-            version = "master";
-            src = inputs.awesome-git-src;
-            patches = [ ];
-
-            GI_TYPELIB_PATH = "${pkgs.playerctl}/lib/girepository-1.0:"
-            + "${pkgs.upower}/lib/girepository-1.0:"
-            + "${pkgs.networkmanager}/lib/girepository-1.0:"
-            + old.GI_TYPELIB_PATH;
-          })).override {
-            gtk3Support = true;
-          };
-          awesome-battery-widget-git = pkgs.callPackage ./pkgs/awesome-battery-widget {
-            src = inputs.awesome-battery-widget-git;
-            inherit (pkgs.lua52Packages) lua toLuaModule;
-          };
-          bling-git = pkgs.callPackage ./pkgs/bling {
-            src = inputs.bling-git;
-            inherit (pkgs.lua52Packages) lua toLuaModule;
-          };
-          rubato-git = pkgs.callPackage ./pkgs/rubato {
-            src = inputs.rubato-git;
-            inherit (pkgs.lua52Packages) lua toLuaModule;
+          pkgs = import nixpkgs {
+            inherit system;
+            allowBroken = true;
+            allowUnfree = true;
+            overlays = [
+              inputs.neovim.overlay
+            ];
           };
 
+          nurPkgs = import ./pkgs (pkgs // nurPkgs) pkgs inputs;
+          #nurAttrs = import ./pkgs { inherit inputs; };
+          #nurPkgs = (import ./pkgs (pkgs // nurPkgs) pkgs) { inherit inputs; };
 
-          neovim-git = pkgs.neovim;
-
-          wezterm-git = pkgs.callPackage ./pkgs/wezterm {
-            version = "nightly";
-            naersk-lib = naersk;
-            src = inputs.wezterm-git-src;
-          };
-
-          # beancount and fava
-          beancount-language-server-git = inputs.beancount-langserver-git.packages."${system}".beancount-language-server-git;
-          beangrow = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/beangrow {
-            src = inputs.beangrow-git;
-            beancount = pkgs.python39Packages.beancount;
-            matplotlib = pkgs.python39Packages.matplotlib;
-            pandas = pkgs.python39Packages.pandas;
-            scipy = pkgs.python39Packages.scipy;
-          };
-        };
-
-      in
-      {
-        packages = flake-utils.lib.filterPackages system packages_prime;
-      }
-    );
-
+        in
+        rec {
+          checks = packages;
+          packages = flake-utils.lib.filterPackages system (flake-utils.lib.flattenTree nurPkgs);
+        }
+      ) // rec {
+      overlays = import ./overlays;
+      #nixosModules = nixpkgs.lib.mapAttrs (name: value: import value) (import ./modules);
+    };
 }

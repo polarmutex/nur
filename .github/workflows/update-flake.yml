@@ -30,4 +30,4 @@ jobs:
       #    branch: "automation/update-flake-dependencies"
       - uses: stefanzweifel/git-auto-commit-action@v4.14.1
         with:
-          commit_message: "[automation] update flake dependencies"
+          commit_message: "chore(flake): update flake dependencies"
