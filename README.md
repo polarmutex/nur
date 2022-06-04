@@ -8,19 +8,27 @@
 
 ## Packages Provided
 
-### awesome-git
+### awesomewm
 
-### [awesome-battery_widget](https://github.com/Aire-One/awesome-battery_widget)
+#### awesome-git
 
-### [bling](https://blingcorp.github.io/bling/#/README)
+#### [awesome-battery_widget](https://github.com/Aire-One/awesome-battery_widget)
 
-### rubato
+#### [bling](https://blingcorp.github.io/bling/#/README)
 
-### [beancount-language-server-git](https://github.com/polarmutex/beancount-language-server)
+#### rubato
 
-### neovim-git
+### beancount
 
-### wezterm-git
+#### [beancount-language-server-git](https://github.com/polarmutex/beancount-language-server)
+
+#### [beangrow](https://github.com/beancount/beangrow)
+
+### other
+
+#### neovim-git
+
+#### wezterm-git
 
 ## Usage
 

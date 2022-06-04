@@ -6,6 +6,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     naersk.url = "github:nix-community/naersk";
 
+    # awesomewm
     awesome-git-src = {
       url = "github:awesomeWM/awesome";
       flake = false;
@@ -17,10 +18,13 @@
     bling-git = { url = "github:BlingCorp/bling"; flake = false; };
     rubato-git = { url = "github:andOrlando/rubato"; flake = false; };
 
-    beancount-langserver = {
+    # beancount
+    beancount-langserver-git = {
       url = "github:polarmutex/beancount-language-server";
     };
+    beangrow-git = { url = "github:beancount/beangrow"; flake = false; };
 
+    # neovim
     neovim = {
       url = "github:neovim/neovim?dir=contrib&tag=master";
     };
@@ -46,7 +50,9 @@
           beancount-language-server-git
 
           neovim-git
-          wezterm-git;
+          wezterm-git
+
+          beangrow;
       };
     }
     // flake-utils.lib.eachDefaultSystem (system:
@@ -92,8 +98,6 @@
             inherit (pkgs.lua52Packages) lua toLuaModule;
           };
 
-          beancount-language-server-git = inputs.beancount-langserver.packages."${system}".beancount-language-server-git;
-
 
           neovim-git = pkgs.neovim;
 
@@ -101,6 +105,16 @@
             version = "nightly";
             naersk-lib = naersk;
             src = inputs.wezterm-git-src;
+          };
+
+          # beancount and fava
+          beancount-language-server-git = inputs.beancount-langserver-git.packages."${system}".beancount-language-server-git;
+          beangrow = pkgs.python3.pkgs.callPackage ./pkgs/python-modules/beangrow {
+            src = inputs.beangrow-git;
+            beancount = pkgs.python39Packages.beancount;
+            matplotlib = pkgs.python39Packages.matplotlib;
+            pandas = pkgs.python39Packages.pandas;
+            scipy = pkgs.python39Packages.scipy;
           };
         };
 

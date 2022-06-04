@@ -32,7 +32,7 @@
         "type": "github"
       }
     },
-    "beancount-langserver": {
+    "beancount-langserver-git": {
       "inputs": {
         "flake-utils": "flake-utils",
         "naersk": "naersk",
@@ -49,6 +49,22 @@
       "original": {
         "owner": "polarmutex",
         "repo": "beancount-language-server",
+        "type": "github"
+      }
+    },
+    "beangrow-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645309172,
+        "narHash": "sha256-rqLeiguJRES/uJZu0kzDagEdHPcMGQS2Neci32EpBVI=",
+        "owner": "beancount",
+        "repo": "beangrow",
+        "rev": "f7a9f453543a3153d0f369add1e1766c5a641697",
+        "type": "github"
+      },
+      "original": {
+        "owner": "beancount",
+        "repo": "beangrow",
         "type": "github"
       }
     },
@@ -242,7 +258,8 @@
       "inputs": {
         "awesome-battery-widget-git": "awesome-battery-widget-git",
         "awesome-git-src": "awesome-git-src",
-        "beancount-langserver": "beancount-langserver",
+        "beancount-langserver-git": "beancount-langserver-git",
+        "beangrow-git": "beangrow-git",
         "bling-git": "bling-git",
         "flake-utils": "flake-utils_2",
         "naersk": "naersk_2",
