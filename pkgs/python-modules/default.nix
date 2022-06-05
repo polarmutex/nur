@@ -8,5 +8,7 @@ in
 {
   inherit callPackage;
 
+  beancount3 = callPackage ./beancount3 { };
+
   beangrow = callPackage ./beangrow { };
 }
