@@ -40,7 +40,7 @@ in
 
 
   neovim-git = pkgs.neovim;
-  neovim-polar = pkgs.neovim-polar;
+  neovim-polar-git = pkgs.neovim-polar;
 
   wezterm-git = callPackage ./wezterm {
     version = "nightly";

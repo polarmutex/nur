@@ -26,5 +26,5 @@ jobs:
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build -L .#awesome-git .#awesome-battery-widget-git .#bling-git .#rubato-git
       - run: nix build -L .#beancount-language-server-git
-      - run: nix build -L .#neovim-git .#neovim-polar .#wezterm-git
+      - run: nix build -L .#neovim-git .#neovim-polar-git .#wezterm-git
       - run: nix build -L .#python3Packages/beancount3
