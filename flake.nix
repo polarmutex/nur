@@ -28,6 +28,9 @@
     neovim = {
       url = "github:neovim/neovim?dir=contrib&tag=master";
     };
+    neovim-flake = {
+      url = "github:polarmutex/neovim-flake";
+    };
 
     wezterm-git-src = {
       type = "git";
@@ -51,6 +54,7 @@
             allowUnfree = true;
             overlays = [
               inputs.neovim.overlay
+              inputs.neovim-flake.overlays.default
             ];
           };
 
