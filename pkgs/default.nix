@@ -54,5 +54,5 @@ in
   };
 
   # beancount and fava
-  beancount-language-server-git = inputs.beancount-langserver-git.packages."${system}".beancount-language-server-git;
+  beancount-language-server-git = inputs.beancount-langserver-git.packages."${system}".default;
 }

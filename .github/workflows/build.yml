@@ -24,7 +24,7 @@ jobs:
         with:
           name: polarmutex
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build -L .#neovim-git .#neovim-polar-git .#wezterm-git
       - run: nix build -L .#awesome-git
       - run: nix build -L .#beancount-language-server-git
-      - run: nix build -L .#neovim-git .#neovim-polar-git .#wezterm-git
       - run: nix build -L .#python3Packages/beancount3
