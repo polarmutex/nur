@@ -44,7 +44,7 @@ in
   };
 
 
-  neovim-git = pkgs.neovim;
+  #neovim-git = pkgs.neovim;
   neovim-polar-git = pkgs.neovim-polar;
 
   wezterm-git = callPackage ./wezterm {

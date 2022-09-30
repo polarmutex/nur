@@ -25,9 +25,9 @@
     beangrow-git = { url = "github:beancount/beangrow"; flake = false; };
 
     # neovim
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib&tag=master";
-    };
+    #neovim = {
+    #  url = "github:neovim/neovim?dir=contrib&tag=master";
+    #};
     neovim-flake = {
       url = "github:polarmutex/neovim-flake";
     };
@@ -53,7 +53,7 @@
             allowBroken = true;
             allowUnfree = true;
             overlays = [
-              inputs.neovim.overlay
+              #inputs.neovim.overlay
               inputs.neovim-flake.overlays.default
             ];
           };
