@@ -4,7 +4,6 @@ with final;
 
 let
   callPackage = pkgs.newScope final;
-  naersk = inputs.naersk.lib."${system}";
   pythonOverrides = import ./python-modules final;
 in
 {
@@ -49,7 +48,7 @@ in
 
   wezterm-git = callPackage ./wezterm {
     version = "nightly";
-    naersk-lib = naersk;
+    crane-lib = inputs.crane.lib."${prev.system}";
     src = inputs.wezterm-git-src;
   };
 

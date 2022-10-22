@@ -1,30 +1,30 @@
-{ dbus
+{ lib
+, stdenv
+, crane-lib
+, runCommand
+, src
+, version
+, dbus
 , egl-wayland
 , fontconfig
 , freetype
-, lib
 , libGL
 , libGLU
 , libglvnd
 , libX11
 , libxcb
 , libxkbcommon
-, naersk-lib
 , ncurses
 , openssl
 , perl
 , pkg-config
 , python3
-, rustPlatform
-, src
-, version
 , wayland
 , xcbutil
 , xcbutilimage
 , xcbutilkeysyms
 , xcbutilwm
 , zlib
-, stdenv
   #, Cocoa
   #, CoreGraphics
   #, Foundation
@@ -32,16 +32,24 @@
 }:
 
 let
-  runtimeDeps = [
-    dbus
-    freetype
+  pname = "wezterm-git";
+
+  nativeBuildInputs = [
+    pkg-config
+    python3
+    ncurses
+  ] ++ lib.optional stdenv.isDarwin perl;
+
+  buildInputs = [
     fontconfig
     zlib
   ] ++ lib.optionals stdenv.isLinux [
+    dbus
     egl-wayland
-    libglvnd
+    freetype
     libGL
     libGLU
+    libglvnd
     libX11
     libxcb
     libxkbcommon
@@ -58,36 +66,47 @@ let
     #libiconv
   ];
 
+  cargoArtifacts = crane-lib.buildDepsOnly {
+    inherit src pname nativeBuildInputs buildInputs;
+  };
+
 in
-naersk-lib.buildPackage {
-  pname = "wezterm-git";
+crane-lib.buildPackage rec {
+  inherit src pname version cargoArtifacts nativeBuildInputs buildInputs;
 
-  inherit version;
-  inherit src;
-
-  nativeBuildInputs = [
-    pkg-config
-    python3
-    ncurses
-  ] ++ lib.optional stdenv.isDarwin perl;
-
-  buildInputs = runtimeDeps;
-
-  preFixup = lib.optionalString stdenv.isLinux ''
-    for artifact in wezterm wezterm-gui wezterm-mux-server strip-ansi-escapes; do
-      patchelf --set-rpath "${
-        lib.makeLibraryPath runtimeDeps
-      }" $out/bin/$artifact
-    done
+  postInstall = ''
+    mkdir -p $out/nix-support
+    echo "${passthru.terminfo}" >> $out/nix-support/propagated-user-env-packages
+    # desktop icon
+    install -Dm644 assets/icon/terminal.png $out/share/icons/hicolor/128x128/apps/org.wezfurlong.wezterm.png
+    install -Dm644 assets/wezterm.desktop $out/share/applications/org.wezfurlong.wezterm.desktop
+    install -Dm644 assets/wezterm.appdata.xml $out/share/metainfo/org.wezfurlong.wezterm.appdata.xml
+    # helper scripts
+    install -Dm644 assets/shell-integration/wezterm.sh -t $out/etc/profile.d
   '';
 
-  singleStep = true;
+  preFixup = lib.optionalString stdenv.isLinux ''
+    patchelf --add-needed "${libGL}/lib/libEGL.so.1" $out/bin/wezterm-gui
+  '' + lib.optionalString stdenv.isDarwin ''
+    mkdir -p "$out/Applications"
+    OUT_APP="$out/Applications/WezTerm.app"
+    cp -r assets/macos/WezTerm.app "$OUT_APP"
+    rm $OUT_APP/*.dylib
+    cp -r assets/shell-integration/* "$OUT_APP"
+    ln -s $out/bin/{wezterm,wezterm-mux-server,wezterm-gui,strip-ansi-escapes} "$OUT_APP"
+  '';
 
-  gitAllRefs = true;
-  gitSubmodules = true;
+  passthru.terminfo = runCommand "wezterm-terminfo"
+    {
+      nativeBuildInputs = [
+        ncurses
+      ];
+    } ''
+    mkdir -p $out/share/terminfo $out/nix-support
+    tic -x -o $out/share/terminfo ${src}/termwiz/data/wezterm.terminfo
+  '';
 
   doCheck = false;
-  dontPatchELF = true;
 
   meta = with lib; {
     description =

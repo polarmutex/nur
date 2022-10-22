@@ -4,7 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    naersk.url = "github:nix-community/naersk";
+    crane.url = "github:ipetkov/crane";
+    crane.inputs.nixpkgs.follows = "nixpkgs";
 
     # awesomewm
     awesome-git-src = {
@@ -25,9 +26,9 @@
     beangrow-git = { url = "github:beancount/beangrow"; flake = false; };
 
     # neovim
-    #neovim = {
-    #  url = "github:neovim/neovim?dir=contrib&tag=master";
-    #};
+    neovim = {
+      url = "github:neovim/neovim?dir=contrib&tag=master";
+    };
     neovim-flake = {
       url = "github:polarmutex/neovim-flake";
     };
@@ -39,6 +40,15 @@
       submodules = true;
       flake = false;
     };
+
+    # about picom forks
+    # https://nuxsh.is-a.dev/blog/picom.html
+    picom-git-src = {
+      type = "git";
+      url = "https://github.com/yshui/picom.git";
+      ref = "next";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, flake-utils, nixpkgs, ... }:
@@ -46,16 +56,26 @@
       (system:
         let
 
-          naersk = inputs.naersk.lib."${system}";
-
           pkgs = import nixpkgs {
             inherit system;
             allowBroken = true;
             allowUnfree = true;
             overlays = [
-              #inputs.neovim.overlay
+              inputs.neovim.overlay
               inputs.neovim-flake.overlays.default
             ];
+            config = {
+              permittedInsecurePackages = [
+                # jdt-language-server
+                "openjdk-headless-16+36"
+                "openjdk-headless-15.0.1-ga"
+                "openjdk-headless-14.0.2-ga"
+                "openjdk-headless-13.0.2-ga"
+                "openjdk-headless-12.0.2-ga"
+              ];
+              # jdt-language-server
+              allowUnsupportedSystem = true;
+            };
           };
 
           nurPkgs = import ./pkgs (pkgs // nurPkgs) pkgs inputs;
