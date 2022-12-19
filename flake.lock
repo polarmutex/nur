@@ -35,11 +35,11 @@
     "awesome-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1670615417,
-        "narHash": "sha256-iAazEbkFOP6FyeUd4tXTQzPosqmNM0Mxf1c1m/eRKWs=",
+        "lastModified": 1671398860,
+        "narHash": "sha256-K9qOOdzo/KEcEb6DJ1Q1W6sqarbDAQ3cm7Oa6pbikHI=",
         "owner": "awesomeWM",
         "repo": "awesome",
-        "rev": "1239cdf4bc9208f57e4bf018d462c2ee63bf0387",
+        "rev": "ee0663459922a41f57fa2cc936da80d5857eedc9",
         "type": "github"
       },
       "original": {
@@ -672,11 +672,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1671329955,
-        "narHash": "sha256-pe2HqSNzufUU1bcz6+lkxPhtjG8AuN22S3WSmf5cDAw=",
+        "lastModified": 1671405047,
+        "narHash": "sha256-lvuERXG09/zB1+yiQdEWrkLUtesRI50U9chEFSm7BsQ=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "1743359235206cbd9da2e0589f1caba37cce3b8c",
+        "rev": "a7332ba9b429f9676723eb88cffb2068f5a95c9b",
         "type": "github"
       },
       "original": {
@@ -739,11 +739,11 @@
         "vim-be-good-src": "vim-be-good-src"
       },
       "locked": {
-        "lastModified": 1671303601,
-        "narHash": "sha256-ei7u+UV1rNbluOtLH7Mk0mF5ihaOfxtOK6AnhrJSwfA=",
+        "lastModified": 1671426027,
+        "narHash": "sha256-54ZaA26Qind6UDhYoqltLjsLoEo+mnDRzz6OLL5HZY4=",
         "owner": "polarmutex",
         "repo": "neovim-flake",
-        "rev": "2ba7fd62f74ddd0277f32691a03c6d239f8745d3",
+        "rev": "acbeddc5766023c61c330056326064cc616614cb",
         "type": "github"
       },
       "original": {
@@ -759,11 +759,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1671281026,
-        "narHash": "sha256-prXfN7KL36MP7R7Da0MaGIXb85PLi1X6Wh2JCqWbwI4=",
+        "lastModified": 1671405047,
+        "narHash": "sha256-lvuERXG09/zB1+yiQdEWrkLUtesRI50U9chEFSm7BsQ=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "1c4794944deb734b24b4a424c50b766a96e050dd",
+        "rev": "a7332ba9b429f9676723eb88cffb2068f5a95c9b",
         "type": "github"
       },
       "original": {
@@ -905,11 +905,11 @@
     "noice-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1671284287,
-        "narHash": "sha256-LmuKPxXgyFG9erIono17N5N8XnOMdoubrgUZ2bkdSdg=",
+        "lastModified": 1671362532,
+        "narHash": "sha256-8aMG0Tre4PIpC5Vt84OU0Ff0KJL9T77/MWq4McIr/yY=",
         "owner": "folke",
         "repo": "noice.nvim",
-        "rev": "367b77f90a0c4384abad8e466e01aad5188ea836",
+        "rev": "7dac8cee3bf0b8b085390ea4283b1a92ef692d81",
         "type": "github"
       },
       "original": {
@@ -937,11 +937,11 @@
     "null-ls-nvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1671050150,
-        "narHash": "sha256-W9VvDvzabFmfntlwg43nhAXg9tB5LDAL9JvILxvRZm0=",
+        "lastModified": 1671402461,
+        "narHash": "sha256-6wC+bmgTf+oP7sCdJhO5xs+hwf7mcsrA9G7Q8lraTRc=",
         "owner": "jose-elias-alvarez",
         "repo": "null-ls.nvim",
-        "rev": "5d8e925d31d8ef8462832308c016ac4ace17597a",
+        "rev": "f1182c2d3748da7c94f5288f8054741f26f0cf3b",
         "type": "github"
       },
       "original": {
@@ -1049,11 +1049,11 @@
     "nvim-lspconfig-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1671288843,
-        "narHash": "sha256-qZzUofbUCEccWv5TWrx6oGtHxxfKeIGzBQbmg2uD/Bw=",
+        "lastModified": 1671346073,
+        "narHash": "sha256-sIzxI7Xk5PeCcCOfQff5FXhY9niHa5A1Ka5RdTQSQjM=",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "54eb2a070a4f389b1be0f98070f81d23e2b1a715",
+        "rev": "973aa14d0992df82ff82f714d978a3eb8d676600",
         "type": "github"
       },
       "original": {
@@ -1081,11 +1081,11 @@
     "nvim-treesitter-context-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1671037666,
-        "narHash": "sha256-iL3sccCDlUUm/jBdzn8hYMCixEQmQURD39vDGNTsFjc=",
+        "lastModified": 1671369025,
+        "narHash": "sha256-x8wRvQCHpPI3oM/nehd7vzMitrsBGZVY2y46JqIlafM=",
         "owner": "romgrk",
         "repo": "nvim-treesitter-context",
-        "rev": "5d0367be7471f50c6b5f8338521b9e851b1d177d",
+        "rev": "d28654b012d4c56beafec630ef7143275dff76f8",
         "type": "github"
       },
       "original": {
@@ -1097,11 +1097,11 @@
     "nvim-treesitter-playground-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1668674170,
-        "narHash": "sha256-oQR0aW/4sUWIA9nBWPOJtZ/T1nQS4MQAX2SJoQqr9vs=",
+        "lastModified": 1671367989,
+        "narHash": "sha256-/d2DoDy3JhnZGyPkAzc+xdE2m9iw1vAAd8UUsC7nif0=",
         "owner": "nvim-treesitter",
         "repo": "playground",
-        "rev": "1290fdf6f2f0189eb3b4ce8073d3fda6a3658376",
+        "rev": "3421bbbfec25a7c54ee041ffb9cb226b69b2b995",
         "type": "github"
       },
       "original": {
@@ -1113,11 +1113,11 @@
     "nvim-treesitter-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1671035236,
-        "narHash": "sha256-RPLAje85GHjStSsY6tkmvgFtPQtCicIyAlp10uobyl4=",
+        "lastModified": 1671400998,
+        "narHash": "sha256-mlbZ5vQGXNXWkFc5YoLrRpVzKa9EVB8QW0mwN/t94CY=",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "6ed8a41bd594e14652318650a83442d385b193a9",
+        "rev": "a75aded7aeba98a89d018f9a6ae0cad9dfbe7c2b",
         "type": "github"
       },
       "original": {
@@ -1145,11 +1145,11 @@
     "picom-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1671028258,
-        "narHash": "sha256-2Zps/3I6+yjr3COqflTiyiYZvFVSoqy0/bQYFwHx+Nw=",
+        "lastModified": 1671391456,
+        "narHash": "sha256-HzdKGfZKkiKNxMvhF3K0EG+/XgM3Z2eZSICP6U5yMaA=",
         "ref": "next",
-        "rev": "17b34ce3909d7e847670d6c121e1f3e5f499bf40",
-        "revCount": 1820,
+        "rev": "c28462673e2b3332b355c33adbec1190572c5407",
+        "revCount": 1822,
         "type": "git",
         "url": "https://github.com/yshui/picom.git"
       },
