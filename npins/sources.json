@@ -1,0 +1,20 @@
+{
+  "pins": {
+    "zellij": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "zellij-org",
+        "repo": "zellij"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.40.1",
+      "revision": "8a9fd8d8486c7bfd516ed05d3d3dd7838e83da86",
+      "url": "https://api.github.com/repos/zellij-org/zellij/tarball/v0.40.1",
+      "hash": "0nbbwwi2v8lpy20y5886rh8zq6l4vjyjqbwvzvq38nwa4yq31iwz"
+    }
+  },
+  "version": 3
+}

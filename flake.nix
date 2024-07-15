@@ -3,9 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    crane.url = "github:ipetkov/crane";
-    crane.inputs.nixpkgs.follows = "nixpkgs";
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    # crane.url = "github:ipetkov/crane";
+    # crane.inputs.nixpkgs.follows = "nixpkgs";
 
     # awesomewm
     awesome-git-src = {
@@ -16,95 +23,73 @@
       url = "github:Aire-One/awesome-battery_widget";
       flake = false;
     };
-    bling-git = { url = "github:BlingCorp/bling"; flake = false; };
-    rubato-git = { url = "github:andOrlando/rubato"; flake = false; };
-
-    # beancount
-    beancount-langserver-git = {
-      url = "github:polarmutex/beancount-language-server";
-    };
-    beangrow-git = { url = "github:beancount/beangrow"; flake = false; };
-
-    # neovim
-    neovim = {
-      url = "github:neovim/neovim?dir=contrib&tag=master";
-    };
-    neovim-flake = {
-      url = "github:polarmutex/neovim-flake";
-    };
-
-    wezterm-git-src = {
-      type = "git";
-      url = "https://github.com/wez/wezterm.git";
-      ref = "main";
-      submodules = true;
+    bling-git = {
+      url = "github:BlingCorp/bling";
       flake = false;
     };
+    rubato-git = {
+      url = "github:andOrlando/rubato";
+      flake = false;
+    };
+
+    # beancount
+    # beancount-langserver-git = {
+    #   url = "github:polarmutex/beancount-language-server";
+    # };
+    # beangrow-git = { url = "github:beancount/beangrow"; flake = false; };
+
+    # wezterm-git-src = {
+    #   type = "git";
+    #   url = "https://github.com/wez/wezterm.git";
+    #   ref = "main";
+    #   submodules = true;
+    #   flake = false;
+    # };
 
     # about picom forks
     # https://nuxsh.is-a.dev/blog/picom.html
-    picom-git-src = {
-      type = "git";
-      url = "https://github.com/yshui/picom.git";
-      ref = "next";
-      flake = false;
-    };
+    # picom-git-src = {
+    #   type = "git";
+    #   url = "https://github.com/yshui/picom.git";
+    #   ref = "next";
+    #   flake = false;
+    # };
   };
 
-  outputs = inputs@{ self, flake-utils, nixpkgs, ... }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-
-          pkgs = import nixpkgs {
-            inherit system;
-            allowBroken = true;
-            allowUnfree = true;
-            overlays = [
-              inputs.neovim.overlay
-              inputs.neovim-flake.overlays.default
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
+    systems = [
+      "x86_64-linux"
+      # "i686-linux"
+      # "x86_64-darwin"
+      # "aarch64-linux"
+      # "armv6l-linux"
+      # "armv7l-linux"
+    ];
+    forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
+  in {
+    packages = forAllSystems (system:
+      import ./default.nix {
+        pkgs = import nixpkgs {
+          inherit system;
+          allowBroken = false;
+          allowUnfree = false;
+          overlays = [
+            (import inputs.rust-overlay)
+          ];
+          config = {
+            permittedInsecurePackages = [
             ];
-            config = {
-              permittedInsecurePackages = [
-                # jdt-language-server
-                "openjdk-headless-16+36"
-                "openjdk-headless-15.0.1-ga"
-                "openjdk-headless-14.0.2-ga"
-                "openjdk-headless-13.0.2-ga"
-                "openjdk-headless-12.0.2-ga"
-              ];
-              # jdt-language-server
-              allowUnsupportedSystem = true;
-            };
+            allowUnsupportedSystem = false;
           };
-
-          nurPkgs = import ./pkgs (pkgs // nurPkgs) pkgs inputs;
-          #nurAttrs = import ./pkgs { inherit inputs; };
-          #nurPkgs = (import ./pkgs (pkgs // nurPkgs) pkgs) { inherit inputs; };
-
-        in
-        rec {
-          #checks = packages;
-          packages = flake-utils.lib.filterPackages system (flake-utils.lib.flattenTree nurPkgs);
-        }
-      ) // rec {
-      overlays.default = final: prev:
-        let
-          nurPkgs = removeAttrs (import ./pkgs final prev inputs) [ "callPackage" ];
-
-          pythonOverrides = pyfinal: pyprev:
-            removeAttrs (import ./pkgs/python-modules final pyfinal pyprev) [ "callPackage" ];
-        in
-        nurPkgs // {
-          python3 = prev.python3.override { packageOverrides = pythonOverrides; };
-          python38 = prev.python38.override { packageOverrides = pythonOverrides; };
-          python39 = prev.python39.override { packageOverrides = pythonOverrides; };
-          python310 = prev.python310.override { packageOverrides = pythonOverrides; };
-          python3Packages = final.python3.pkgs;
-          python38Packages = final.python38.pkgs;
-          python39Packages = final.python39.pkgs;
-          python310Packages = final.python310.pkgs;
         };
-      #nixosModules = nixpkgs.lib.mapAttrs (name: value: import value) (import ./modules);
-    };
+      });
+    devShells = forAllSystems (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in
+      import ./shell.nix {inherit pkgs;});
+  };
 }
