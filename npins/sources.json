@@ -10,10 +10,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v0.40.1",
-      "revision": "8a9fd8d8486c7bfd516ed05d3d3dd7838e83da86",
-      "url": "https://api.github.com/repos/zellij-org/zellij/tarball/v0.40.1",
-      "hash": "0nbbwwi2v8lpy20y5886rh8zq6l4vjyjqbwvzvq38nwa4yq31iwz"
+      "version": "v0.41.1",
+      "revision": "df21de42b1a43de3f50f6b1f8d2ce988ee81cd69",
+      "url": "https://api.github.com/repos/zellij-org/zellij/tarball/v0.41.1",
+      "hash": "071lq8cy2asqdgc7fj3rml5m3xlzx3f8d1sp522lp6q9rlf0jjhi"
     }
   },
   "version": 3
